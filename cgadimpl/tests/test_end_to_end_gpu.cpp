@@ -1,4 +1,6 @@
-// test_end_to_end_gpu.cpp
+// =====================
+// // file: tests/test_end_to_end_gpu.cpp
+// // =====================
 #include "ad/ag_all.hpp"
 #include <iostream>
 

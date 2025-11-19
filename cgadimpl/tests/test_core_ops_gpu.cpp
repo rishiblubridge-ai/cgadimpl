@@ -1,3 +1,8 @@
+// =====================
+// // file: tests/test_core_ops_gpu.cpp
+// // =====================
+
+
 #include "ad/ag_all.hpp"
 #include <iostream>
 #include <vector>

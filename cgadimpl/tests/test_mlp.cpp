@@ -1,4 +1,6 @@
-// test_mlp.cpp:
+// =====================
+// // file: tests/test_mlp.cpp
+// // =====================
 #include "ad/ag_all.hpp"
 #include "ad/debug.hpp"
 #include <iostream>
