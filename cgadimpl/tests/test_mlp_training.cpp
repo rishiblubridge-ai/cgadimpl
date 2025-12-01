@@ -186,6 +186,6 @@ int main() {
         return 1;
     }
 
-    std::cout << "\n✅ All end-to-end training tests passed successfully!\n";
+    std::cout << "\n  All end-to-end training tests passed successfully!\n";
     return 0;
 }

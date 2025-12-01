@@ -41,9 +41,9 @@
 // //     std::cout << "\n--- Checkpoint verification ---\n";
 // //     auto n = y2.node;
 // //     if (n->is_checkpoint) {
-// //         std::cout << "Node " << n->debug_name << " is checkpointed ✅\n";
+// //         std::cout << "Node " << n->debug_name << " is checkpointed    \n";
 // //     } else {
-// //         std::cout << "Node " << n->debug_name << " is NOT checkpointed ❌\n";
+// //         std::cout << "Node " << n->debug_name << " is NOT checkpointed    \n";
 // //     }
 
 // //     // 6. Inspect gradient values
@@ -54,7 +54,7 @@
 // //     // 7. Check recomputation correctness manually
 // //     std::cout << "\nRecomputing checkpoint manually...\n";
 // //     bool recomputed = checkpoint_impl::recompute_subgraph(y2.node->shared_from_this());
-// //     std::cout << (recomputed ? "Recomputation success ✅\n" : "Recomputation failed ❌\n");
+// //     std::cout << (recomputed ? "Recomputation success    \n" : "Recomputation failed    \n");
 
 // //     // 8. Print recomputed value
 // //     std::cout << "\nCheckpointed node value after recompute:\n";
@@ -132,16 +132,16 @@
 //         visited.insert(n.get());
 //         if (n->is_checkpoint) {
 //             ++checkpointed_count;
-//             std::cout << "Checkpointed node: " << n->debug_name << " ✅\n";
+//             std::cout << "Checkpointed node: " << n->debug_name << "    \n";
 //         }
 //         for (auto &p : n->inputs)
 //             if (p) q.push_back(p);
 //     }
 
 //     if (checkpointed_count == 0)
-//         std::cout << "❌ No nodes were marked as checkpointed.\n";
+//         std::cout << "   No nodes were marked as checkpointed.\n";
 //     else
-//         std::cout << "✅ Total checkpointed nodes: " << checkpointed_count << "\n";
+//         std::cout << "  Total checkpointed nodes: " << checkpointed_count << "\n";
 
 //     // ------------------------------------------------------------
 //     // 6. Backward pass (triggers recomputation of checkpointed nodes)
@@ -162,7 +162,7 @@
 //     if (n->is_checkpoint && !n->inputs.empty()) {
 //         bool ok = checkpoint_impl::recompute_subgraph(n->shared_from_this());
 //         std::cout << "Recomputed node (" << n->debug_name << "): "
-//                   << (ok ? "✅" : "❌") << "\n";
+//                   << (ok ? "   " : "   ") << "\n";
 //             break;
 //         }
 //     }
@@ -207,6 +207,6 @@ int main() {
     
     assert(grad_sum > 0.0f && "FATAL: Gradients are zero! Recomputation failed.");
     
-    std::cout << "\n✅ PASS: Checkpointing test completed successfully.\n";
+    std::cout << "\n  PASS: Checkpointing test completed successfully.\n";
     return 0;
 }

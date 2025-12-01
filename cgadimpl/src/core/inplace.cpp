@@ -192,10 +192,10 @@ static thread_local std::unordered_set<Node*> g_recompute_in_progress;
  *  the tensor using its input dependencies.
  *
  *  Steps:
- *    1️⃣ Prevent recursive recompute (guard via thread-local set).
- *    2️⃣ Recompute forward pass of node via checkpoint subsystem.
- *    3️⃣ Update version and snapshot upon success.
- *    4️⃣ Propagate result to alias nodes.
+ *         Prevent recursive recompute (guard via thread-local set).
+ *         Recompute forward pass of node via checkpoint subsystem.
+ *          Update version and snapshot upon success.
+ *           Propagate result to alias nodes.
  *    5️⃣ Clear in-progress flag.
  */
 bool recompute_inplace(const NodePtr& node) {

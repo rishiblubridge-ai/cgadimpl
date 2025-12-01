@@ -57,6 +57,6 @@ int main() {
         std::cout << "CUDA not available, skipping GPU test.\n";
     }
     
-    std::cout << "\n✅ End-to-end test completed successfully.\n";
+    std::cout << "\n  End-to-end test completed successfully.\n";
     return 0;
 }

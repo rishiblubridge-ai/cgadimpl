@@ -5,6 +5,7 @@
 #include <memory>
 #include <vector>
 #include "tensor.hpp"
+#include <memory_resource>
 #include "ad/schema.hpp"
 
 namespace ag {
@@ -24,7 +25,7 @@ struct Value {
 struct Node : std::enable_shared_from_this<Node> {
     Tensor value;
     Tensor grad;
-    std::vector<std::shared_ptr<Node>> inputs;
+    std::vector<std::shared_ptr<Node>> inputs; 
     std::vector<Value> saved_inputs;
     std::vector<std::shared_ptr<Tensor>> tape;
     std::vector<uint8_t> saved_rng_blob;

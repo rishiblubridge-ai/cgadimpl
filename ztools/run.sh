@@ -50,7 +50,7 @@
 # ctest --output-on-failure
 # cd "$ROOT"
 
-# echo "✅ Build and test run process finished."
+# echo "  Build and test run process finished."
 #!/bin/bash
 set -euo pipefail
 
@@ -124,4 +124,4 @@ cd "$CGADIMPL_BUILD"
 ctest --output-on-failure
 cd "$ROOT"
 
-echo "✅ Build and test run process finished."
+echo "  Build and test run process finished."

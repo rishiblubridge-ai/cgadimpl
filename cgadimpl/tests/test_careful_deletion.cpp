@@ -41,7 +41,7 @@ int main() {
     std::cout << "===== COMPLEX CAREFUL DELETION TEST =====\n";
 
     // -------------------------------------------------------------
-    // 1️⃣ BUILD A COMPLEX COMPUTATION GRAPH
+    //      BUILD A COMPLEX COMPUTATION GRAPH
     // -------------------------------------------------------------
     auto opts_param = TensorOptions().with_req_grad(true);
     Tensor Ta = Tensor::randn(Shape{{3, 3}}, opts_param);
@@ -86,7 +86,7 @@ int main() {
     std::cout << "[Graph Build] Completed forward graph construction.\n";
 
     // -------------------------------------------------------------
-    // 2️⃣ FORWARD AND BACKWARD
+    //      FORWARD AND BACKWARD
     // -------------------------------------------------------------
     backward(loss);
     std::cout << "\n[Backward] Gradients computed successfully.\n";
@@ -97,7 +97,7 @@ int main() {
     debug::print_grad("d.grad", d);
 
     // -------------------------------------------------------------
-    // 3️⃣ VERSION TRACKING AFTER FORWARD
+    //       VERSION TRACKING AFTER FORWARD
     // -------------------------------------------------------------
     size_t v1 = inplace::get_tensor_version(l1.node.get());
     size_t v3 = inplace::get_tensor_version(l3.node.get());
@@ -113,16 +113,16 @@ int main() {
     std::cout << "  Layer3 version after in-place update = " << v3_after << "\n";
 
     // -------------------------------------------------------------
-    // 4️⃣ RUN CAREFUL DELETION (SAFE MODE)
+    //        RUN CAREFUL DELETION (SAFE MODE)
     // -------------------------------------------------------------
     std::cout << "\n[Careful Deletion: SAFE MODE]\n";
     ag::memory::sweep_safe_nodes(loss, ag::memory::DeletePolicy::AlwaysSafe);
     std::cout << "  ✔ Safe deletion completed.\n";
     std::cout << "  Check if checkpoint node is still protected: "
-              << (l1.node->is_checkpoint ? "✅ yes\n" : "❌ no\n");
+              << (l1.node->is_checkpoint ? "  yes\n" : "   no\n");
 
     // -------------------------------------------------------------
-    // 5️⃣ SIMULATE VALUE DROPS AND RECOMPUTE
+    // SIMULATE VALUE DROPS AND RECOMPUTE
     // -------------------------------------------------------------
     std::cout << "\n[Simulate Deallocation + Recomputation]\n";
     // Correctly create empty tensors to simulate deallocation
@@ -132,8 +132,8 @@ int main() {
     bool ok1 = ag::checkpoint_impl::recompute_subgraph(l1.node);
     // For in-place, the correct recompute function is different
     bool ok3 = ag::inplace::recompute_inplace(l3.node); 
-    std::cout << "  Layer1 recompute: " << (ok1 ? "✅ success\n" : "❌ fail\n");
-    std::cout << "  Layer3 recompute: " << (ok3 ? "✅ success\n" : "❌ fail\n");
+    std::cout << "  Layer1 recompute: " << (ok1 ? "  success\n" : "   fail\n");
+    std::cout << "  Layer3 recompute: " << (ok3 ? "  success\n" : "   fail\n");
 
     if (ok1) {
         debug::print_value("l1 (recomputed)", l1);
@@ -143,7 +143,7 @@ int main() {
     }
 
     // -------------------------------------------------------------
-    // 6️⃣ CAREFUL DELETION (AGGRESSIVE MODE)
+    //          CAREFUL DELETION (AGGRESSIVE MODE)
     // -------------------------------------------------------------
     std::cout << "\n[Careful Deletion: AGGRESSIVE MODE]\n";
     ag::memory::sweep_safe_nodes(loss, ag::memory::DeletePolicy::Aggressive);
@@ -151,20 +151,20 @@ int main() {
     bool ok1b = ag::checkpoint_impl::recompute_subgraph(l1.node);
     bool ok3b = ag::inplace::recompute_inplace(l3.node);
     std::cout << "  After aggressive deletion:\n";
-    std::cout << "    Layer1 recompute: " << (ok1b ? "✅ success" : "⚠️ failed (metadata removed)") << "\n";
-    std::cout << "    Layer3 recompute: " << (ok3b ? "✅ success" : "⚠️ failed (metadata removed)") << "\n";
+    std::cout << "    Layer1 recompute: " << (ok1b ? "  success" : "⚠️ failed (metadata removed)") << "\n";
+    std::cout << "    Layer3 recompute: " << (ok3b ? "  success" : "⚠️ failed (metadata removed)") << "\n";
 
     // -------------------------------------------------------------
-    // 7️⃣ ALIAS CONSISTENCY CHECK
+    //            ALIAS CONSISTENCY CHECK
     // -------------------------------------------------------------
     std::cout << "\n[Alias Consistency Check]\n";
     if (allclose(l1.val(), l2.val()))
-        std::cout << "✅ Alias values consistent after recompute.\n";
+        std::cout << "  Alias values consistent after recompute.\n";
     else
-        std::cout << "❌ Alias values diverged.\n";
+        std::cout << "   Alias values diverged.\n";
 
     // -------------------------------------------------------------
-    // 8️⃣ FINAL VERSION TABLE
+    //             FINAL VERSION TABLE
     // -------------------------------------------------------------
     std::cout << "\n[Final Version Table]\n";
     ag::inplace::debug::print_version_table();

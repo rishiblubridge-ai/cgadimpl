@@ -52,9 +52,9 @@ int main() {
 
     std::cout << "\n[Summary] v0=" << ver0 << " v1=" << ver1 << " v2=" << ver2 << " v3=" << ver3 << "\n";
     if (ver3 > ver2 && ver2 > ver1 && ver1 > ver0)
-        std::cout << "✅ Version numbers increased monotonically.\n";
+        std::cout << "  Version numbers increased monotonically.\n";
     else
-        std::cout << "❌ Versioning sequence incorrect!\n";
+        std::cout << "   Versioning sequence incorrect!\n";
 
     std::cout << "===== Versioning System Test Completed =====\n";
     return 0;

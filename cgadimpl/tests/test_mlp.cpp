@@ -103,7 +103,7 @@ int main() {
     debug::print_grad("W4", W4);
     debug::print_grad("b4", b4);
     
-    std::cout << "\n✅ test_mlp completed.\n";
+    std::cout << "\n  test_mlp completed.\n";
 
     /*
     --- HAND CALCULATION FOR L1 ---

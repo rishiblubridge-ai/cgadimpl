@@ -77,6 +77,7 @@ if(true)
   add_ag_test(test_kernels_gpu                    tests/test_kernels_gpu.cpp)
   add_ag_test(test_graph_cuda                    tests/test_graph_gpu.cpp)
   add_ag_test(test_core_ops_gpu                    tests/test_core_ops_gpu.cpp)
+  add_ag_test(test_arena                               tests/test_arena.cpp)
 endif()
 
 message(STATUS "cgadimpl build mode: ${CMAKE_BUILD_TYPE}")

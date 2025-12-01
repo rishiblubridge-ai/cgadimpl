@@ -321,12 +321,12 @@ return Value(detail::realrms_nodeops(x.node, g));
  *        or runtime validation of the computational graph.
  *
  *  Core logic:
- *      1️⃣  Validate that the node exists.
- *      2️⃣  Switch over the node’s operation (`Op` enum).
- *      3️⃣  Retrieve the node’s input tensors (`node->inputs[i]->value`).
- *      4️⃣  Perform the appropriate mathematical operation.
+ *            Validate that the node exists.
+ *            Switch over the node’s operation (`Op` enum).
+ *             Retrieve the node’s input tensors (`node->inputs[i]->value`).
+ *              Perform the appropriate mathematical operation.
  *      5️⃣  Return the computed output tensor.
- *      6️⃣  If unsupported, throw a runtime error.
+ *                If unsupported, throw a runtime error.
  */
 #include <ad/checkpoint.hpp>
 Tensor forward_eval_node(const std::shared_ptr<Node> &node) {
