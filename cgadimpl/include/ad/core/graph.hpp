@@ -6,6 +6,7 @@
 #include <vector>
 #include <atomic>
 #include <mutex>
+#include "ad/core/arena.hpp"
 
 #include "tensor.hpp"
 #include "ad/core/schema.hpp"
@@ -13,7 +14,7 @@
 
 namespace ag {
 struct Node;
-struct Value {
+struct [[nodiscard]]Value {
     std::shared_ptr<Node> node;
     Value();    
     explicit Value(std::shared_ptr<Node> n);

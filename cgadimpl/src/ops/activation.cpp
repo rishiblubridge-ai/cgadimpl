@@ -7,7 +7,10 @@
 #include <cuda_runtime.h>
 #include "tensor.hpp" 
 #include <unordered_map>
-#include <cmath> 
+#include <cmath>
+#include <type_traits>
+#include <limits>
+#include <stdexcept> 
 
 namespace ag {
 namespace detail {
@@ -428,10 +431,14 @@ std::shared_ptr<Node> relumask_nodeops(const std::shared_ptr<Node>& x) {
             using T = decltype(dummy);
             const T* x_data = xin.data<T>();
             T* y_data = y.data<T>();
-            for (int64_t i = 0; i < xin.numel(); ++i) {
-                if (x_data[i] > T(0)) {
-                    y_data[i] = T(1);
+            if constexpr (std::is_floating_point_v<T>) {
+                for (int64_t i = 0; i < xin.numel(); ++i) {
+                    if (x_data[i] > T(0)) {
+                        y_data[i] = T(1);
+                    }
                 }
+            } else {
+                 throw std::runtime_error("Relumask not implemented for this dtype");
             }
         });
     } else {
@@ -605,13 +612,17 @@ std::shared_ptr<Node> alibiatt_nodeops(const std::shared_ptr<Node>& a, const std
         dispatch_by_dtype(bias_cpu.dtype(), [&](auto dummy){
             using T = decltype(dummy);
             T* data = bias_cpu.data<T>();
-            for(int h = 0; h < n_heads; ++h) {
-                float slope = powf(slope_start, h + 1);
-                for (int i = 0; i < seq_len; ++i) {
-                    for (int j = 0; j < seq_len; ++j) {
-                        data[h * seq_len * seq_len + i * seq_len + j] = (j > i) ? -std::numeric_limits<float>::infinity() : static_cast<T>(-(seq_len - 1 - j) * slope);
+            if constexpr (std::is_floating_point_v<T>) {
+                for(int h = 0; h < n_heads; ++h) {
+                    float slope = powf(slope_start, h + 1);
+                    for (int i = 0; i < seq_len; ++i) {
+                        for (int j = 0; j < seq_len; ++j) {
+                            data[h * seq_len * seq_len + i * seq_len + j] = (j > i) ? -std::numeric_limits<float>::infinity() : static_cast<T>(-(seq_len - 1 - j) * slope);
+                        }
                     }
                 }
+            } else {
+                 throw std::runtime_error("AlibiAtt not implemented for this dtype");
             }
         });
     }

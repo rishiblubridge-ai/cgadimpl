@@ -7,6 +7,7 @@
 #include "ad/autodiff/checkpoint.hpp"
 #include "ad/ops/kernels_api.hpp"
 #include "ad/utils/debug.hpp"
+#include "ad/core/nodiscard.hpp"
 
 #include "ops/TensorOps.h"
 #include "ops/UnaryOps/Arithmetics.h"
@@ -28,17 +29,17 @@ namespace detail {
 
 //std::shared_ptr<Node> checkpoint_nodeops(const std::shared_ptr<Node> &v, const CheckpointOptions &opts);
 
-std::shared_ptr<Node> add_nodeops(const std::shared_ptr<Node>& a, const std::shared_ptr<Node>& b);
-std::shared_ptr<Node> sub_nodeops(const std::shared_ptr<Node>& a, const std::shared_ptr<Node>& b);
-std::shared_ptr<Node> mul_nodeops(const std::shared_ptr<Node>& a, const std::shared_ptr<Node>& b);
-std::shared_ptr<Node> div_nodeops(const std::shared_ptr<Node>& a, const std::shared_ptr<Node>& b);
+AG_NODISCARD std::shared_ptr<Node> add_nodeops(const std::shared_ptr<Node>& a, const std::shared_ptr<Node>& b);
+AG_NODISCARD std::shared_ptr<Node> sub_nodeops(const std::shared_ptr<Node>& a, const std::shared_ptr<Node>& b);
+AG_NODISCARD std::shared_ptr<Node> mul_nodeops(const std::shared_ptr<Node>& a, const std::shared_ptr<Node>& b);
+AG_NODISCARD std::shared_ptr<Node> div_nodeops(const std::shared_ptr<Node>& a, const std::shared_ptr<Node>& b);
 
-std::shared_ptr<Node> relu_nodeops(const std::shared_ptr<Node>& x);
-std::shared_ptr<Node> matmul_nodeops(const std::shared_ptr<Node>& a, const std::shared_ptr<Node>& b);
-std::shared_ptr<Node> sum_nodeops(const std::shared_ptr<Node>& x);
-std::shared_ptr<Node> flomul_nodeops(const std::shared_ptr<Node>& a, float b);
-std::shared_ptr<Node> floadd_nodeops(float b, const std::shared_ptr<Node>& a);
-std::shared_ptr<Node> flodiv_nodeops(float b, const std::shared_ptr<Node>& a);
+AG_NODISCARD std::shared_ptr<Node> relu_nodeops(const std::shared_ptr<Node>& x);
+AG_NODISCARD std::shared_ptr<Node> matmul_nodeops(const std::shared_ptr<Node>& a, const std::shared_ptr<Node>& b);
+AG_NODISCARD std::shared_ptr<Node> sum_nodeops(const std::shared_ptr<Node>& x);
+AG_NODISCARD std::shared_ptr<Node> flomul_nodeops(const std::shared_ptr<Node>& a, float b);
+AG_NODISCARD std::shared_ptr<Node> floadd_nodeops(float b, const std::shared_ptr<Node>& a);
+AG_NODISCARD std::shared_ptr<Node> flodiv_nodeops(float b, const std::shared_ptr<Node>& a);
 
 inline std::shared_ptr<Node> operator+(const std::shared_ptr<Node>& a, const std::shared_ptr<Node>& b){ return add_nodeops(a,b);}
 inline std::shared_ptr<Node> operator-(const std::shared_ptr<Node>& a, const std::shared_ptr<Node>& b){ return sub_nodeops(a,b);}
@@ -98,6 +99,7 @@ std::shared_ptr<Node> softmax_row_nodeops( const std::shared_ptr<Node>& z); // [
 std::shared_ptr<Node> logsumexp_row_nodeops(const std::shared_ptr<Node>& z); // [B,C] -> [B,1]
 std::shared_ptr<Node> laynor_nodeops(const std::shared_ptr<Node>& x);
 std::shared_ptr<Node> alibiatt_nodeops( const std::shared_ptr<Node>& a, const std::shared_ptr<Node>& b, const std::shared_ptr<Node>& c, const std::shared_ptr<Node>& d, float& m); // m = max seq len
+
 
 // composite loss (one-hot targets)
 std::shared_ptr<Node> cross_entropy_with_logits_nodeops(const std::shared_ptr<Node>& logits, const std::shared_ptr<Node>& onehot);

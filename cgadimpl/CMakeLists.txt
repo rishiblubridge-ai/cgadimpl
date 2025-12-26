@@ -118,6 +118,18 @@ target_link_libraries(cgadimpl PUBLIC
     LLVMSupport
 )
 
+# --- FIX: Prioritize Local NovaCompiler Includes ---
+# We derive the include path from the mlir-compiler_DIR which is passed as
+# <install_prefix>/lib/cmake/mlir-compiler. We need <install_prefix>/include.
+get_filename_component(NOVA_CMAKE_DIR "${mlir-compiler_DIR}" ABSOLUTE)
+get_filename_component(NOVA_LIB_DIR "${NOVA_CMAKE_DIR}" DIRECTORY)
+get_filename_component(NOVA_LIB_DIR "${NOVA_LIB_DIR}" DIRECTORY) # up to lib
+get_filename_component(NOVA_INSTALL_PREFIX "${NOVA_LIB_DIR}" DIRECTORY) # up to install prefix
+set(NOVA_INCLUDE_DIR "${NOVA_INSTALL_PREFIX}/include")
+
+include_directories(BEFORE "${NOVA_INCLUDE_DIR}")
+message(STATUS "Forcing NovaCompiler include dir: ${NOVA_INCLUDE_DIR}")
+
 # ---- Tests ----
 if(true)
   enable_testing()
@@ -168,6 +180,8 @@ if(true)
   add_ag_test(time_estimation                   Tests/test_time_execution.cpp)
   add_ag_test(test_dag_analysis                Tests/test_dag_analysis.cpp)
   add_ag_test(test_warmup                      Tests/test_warmup.cpp)
+
+  add_ag_test(test_arena                        Tests/test_arena.cpp)
 
 endif()
 

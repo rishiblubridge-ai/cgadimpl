@@ -8,6 +8,10 @@ BUILD_TYPE="Debug"
 export CUDACXX=/usr/local/cuda-13.0/bin/nvcc
 
 # --- Path Setup ---
+export MLIR_DIR="/home/blubridge-041/Desktop/llvm-project/build/lib/cmake/mlir"
+
+MLIR_COMPILER_DIR="/home/blubridge-041/Downloads/cgadimpl-experiment-11.11.25/Nova-Compiler/install/lib/cmake/mlir-compiler"
+
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 CGADIMPL_DIR="$ROOT/cgadimpl"
 CGADIMPL_BUILD="$CGADIMPL_DIR/build"
@@ -32,7 +36,9 @@ cd "${ROOT}"
 
 # --- STEP 2: Configure and build the core cgadimpl library ---
 echo "== Configuring core"
-cmake -S "$CGADIMPL_DIR" -B "$CGADIMPL_BUILD" -DCMAKE_BUILD_TYPE="$BUILD_TYPE"
+cmake -S "$CGADIMPL_DIR" -B "$CGADIMPL_BUILD" \
+    -DCMAKE_BUILD_TYPE="$BUILD_TYPE" \
+    -Dmlir-compiler_DIR="$MLIR_COMPILER_DIR"
 
 echo "== Building core"
 cmake --build "$CGADIMPL_BUILD" -- -j$(nproc)
