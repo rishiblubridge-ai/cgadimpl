@@ -1,0 +1,137 @@
+================================================================================
+NODISCARD WARNINGS - Compilation Output Summary
+================================================================================
+
+The warnings appear during COMPILATION (not runtime).
+To see them, you need to recompile the test file.
+
+Command used:
+  cd build && make clean && make test_nodiscard_bench
+
+================================================================================
+ALL WARNINGS GENERATED (15 total)
+================================================================================
+
+Line 49: matmul(x, W1);
+--------------------------------------------------------------------------------
+/home/blubridge-041/Downloads/cgadimpl-experiment-11.11.25/cgadimpl/Tests/test_nodiscard_bench.cpp:49:22: 
+warning: ignoring returned value of type 'ag::Value', declared with attribute 'nodiscard' [-Wunused-result]
+   49 |         matmul(x, W1);           // Ignored return value
+      |                      ^
+
+Line 50: sigmoid(matmul(x, W1));
+--------------------------------------------------------------------------------
+/home/blubridge-041/Downloads/cgadimpl-experiment-11.11.25/cgadimpl/Tests/test_nodiscard_bench.cpp:50:31: 
+warning: ignoring returned value of type 'ag::Value', declared with attribute 'nodiscard' [-Wunused-result]
+   50 |         sigmoid(matmul(x, W1));  // Ignored return value
+      |                               ^
+
+Line 51: matmul(x, W1) + b1;
+--------------------------------------------------------------------------------
+/home/blubridge-041/Downloads/cgadimpl-experiment-11.11.25/cgadimpl/Tests/test_nodiscard_bench.cpp:51:27: 
+warning: ignoring returned value of type 'ag::Value', declared with attribute 'nodiscard' [-Wunused-result]
+   51 |         matmul(x, W1) + b1;      // Ignored return value (operator+ returns Value)
+      |                           ^
+
+Line 55: matmul(h1, W2);
+--------------------------------------------------------------------------------
+/home/blubridge-041/Downloads/cgadimpl-experiment-11.11.25/cgadimpl/Tests/test_nodiscard_bench.cpp:55:23: 
+warning: ignoring returned value of type 'ag::Value', declared with attribute 'nodiscard' [-Wunused-result]
+   55 |         matmul(h1, W2);          // Ignored return value
+      |                       ^
+
+Line 56: h1 + b2;
+--------------------------------------------------------------------------------
+/home/blubridge-041/Downloads/cgadimpl-experiment-11.11.25/cgadimpl/Tests/test_nodiscard_bench.cpp:56:16: 
+warning: ignoring returned value of type 'ag::Value', declared with attribute 'nodiscard' [-Wunused-result]
+   56 |         h1 + b2;                 // Ignored return value
+      |                ^
+
+Line 59: h1 * h1;
+--------------------------------------------------------------------------------
+/home/blubridge-041/Downloads/cgadimpl-experiment-11.11.25/cgadimpl/Tests/test_nodiscard_bench.cpp:59:16: 
+warning: ignoring returned value of type 'ag::Value', declared with attribute 'nodiscard' [-Wunused-result]
+   59 |         h1 * h1;                 // Ignored return value
+      |                ^
+
+Line 60: h1 - h1;
+--------------------------------------------------------------------------------
+/home/blubridge-041/Downloads/cgadimpl-experiment-11.11.25/cgadimpl/Tests/test_nodiscard_bench.cpp:60:16: 
+warning: ignoring returned value of type 'ag::Value', declared with attribute 'nodiscard' [-Wunused-result]
+   60 |         h1 - h1;                 // Ignored return value
+      |                ^
+
+Line 61: h1 / h1;
+--------------------------------------------------------------------------------
+/home/blubridge-041/Downloads/cgadimpl-experiment-11.11.25/cgadimpl/Tests/test_nodiscard_bench.cpp:61:16: 
+warning: ignoring returned value of type 'ag::Value', declared with attribute 'nodiscard' [-Wunused-result]
+   61 |         h1 / h1;                 // Ignored return value
+      |                ^
+
+Line 98: a + b;
+--------------------------------------------------------------------------------
+/home/blubridge-041/Downloads/cgadimpl-experiment-11.11.25/cgadimpl/Tests/test_nodiscard_bench.cpp:98:10: 
+warning: ignoring returned value of type 'ag::Value', declared with attribute 'nodiscard' [-Wunused-result]
+   98 |     a + b;           // WARNING: ignored return value
+      |          ^
+
+Line 99: a - b;
+--------------------------------------------------------------------------------
+/home/blubridge-041/Downloads/cgadimpl-experiment-11.11.25/cgadimpl/Tests/test_nodiscard_bench.cpp:99:10: 
+warning: ignoring returned value of type 'ag::Value', declared with attribute 'nodiscard' [-Wunused-result]
+   99 |     a - b;           // WARNING: ignored return value
+      |          ^
+
+Line 100: a * b;
+--------------------------------------------------------------------------------
+/home/blubridge-041/Downloads/cgadimpl-experiment-11.11.25/cgadimpl/Tests/test_nodiscard_bench.cpp:100:10: 
+warning: ignoring returned value of type 'ag::Value', declared with attribute 'nodiscard' [-Wunused-result]
+  100 |     a * b;           // WARNING: ignored return value
+      |          ^
+
+Line 101: a / b;
+--------------------------------------------------------------------------------
+/home/blubridge-041/Downloads/cgadimpl-experiment-11.11.25/cgadimpl/Tests/test_nodiscard_bench.cpp:101:10: 
+warning: ignoring returned value of type 'ag::Value', declared with attribute 'nodiscard' [-Wunused-result]
+  101 |     a / b;           // WARNING: ignored return value
+      |          ^
+
+Line 102: sum(a);
+--------------------------------------------------------------------------------
+/home/blubridge-041/Downloads/cgadimpl-experiment-11.11.25/cgadimpl/Tests/test_nodiscard_bench.cpp:102:11: 
+warning: ignoring returned value of type 'ag::Value', declared with attribute 'nodiscard' [-Wunused-result]
+  102 |     sum(a);          // WARNING: ignored return value
+      |           ^
+
+Line 103: sigmoid(a);
+--------------------------------------------------------------------------------
+/home/blubridge-041/Downloads/cgadimpl-experiment-11.11.25/cgadimpl/Tests/test_nodiscard_bench.cpp:103:15: 
+warning: ignoring returned value of type 'ag::Value', declared with attribute 'nodiscard' [-Wunused-result]
+  103 |     sigmoid(a);      // WARNING: ignored return value
+      |               ^
+
+Line 104: matmul(a, b);
+--------------------------------------------------------------------------------
+/home/blubridge-041/Downloads/cgadimpl-experiment-11.11.25/cgadimpl/Tests/test_nodiscard_bench.cpp:104:17: 
+warning: ignoring returned value of type 'ag::Value', declared with attribute 'nodiscard' [-Wunused-result]
+  104 |     matmul(a, b);    // WARNING: ignored return value
+      |                 ^
+
+================================================================================
+SUMMARY
+================================================================================
+
+✅ Total warnings generated: 15
+✅ All intentionally ignored return values were caught!
+✅ AG_NODISCARD is working perfectly!
+
+The [[nodiscard]] attribute successfully prevents developers from accidentally
+ignoring Value return values, which would break the computational graph.
+
+To see these warnings yourself:
+1. cd build
+2. make clean
+3. make test_nodiscard_bench 2>&1 | grep "warning: ignoring"
+
+Or view the full compilation log:
+   cat build/nodiscard_warnings.txt
